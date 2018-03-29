@@ -1,6 +1,10 @@
 #### ChangeLog 
 ##### Last Update 2017-06-22
 
+
+###### v1.4.8
+- Fix：ck http to https
+
 ###### v1.4.7
 - new：新增兩個網站的支援
 - 版號以後就只用三碼
