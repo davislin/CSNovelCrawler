@@ -20,7 +20,7 @@ namespace CSNovelCrawler.Plugin
 
         public bool CheckUrl(string url)
         {
-            Regex r = new Regex(@"(^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=\d+\&extra\=page\d+\.html)");
+            Regex r = new Regex(@"(^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=\d+\&extra\=page(%3D)?\d+\.html)");
             Match m = r.Match(url);
             if (m.Success)
             {
@@ -31,7 +31,7 @@ namespace CSNovelCrawler.Plugin
 
         public string GetHash(string url)
         {
-            Regex r = new Regex(@"(^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=(?<TID>\d+)\&extra\=page\d+\.html)");
+            Regex r = new Regex(@"(^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=(?<TID>\d+)\&extra\=page(%3D)?\d+\.html)");
             Match m = r.Match(url);
             if (m.Success)
             {

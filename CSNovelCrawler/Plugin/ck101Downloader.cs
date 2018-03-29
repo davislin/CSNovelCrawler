@@ -42,7 +42,7 @@ namespace CSNovelCrawler.Plugin
         public override bool Analysis()
         {
             //取TID
-            Regex r = new Regex(@"^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=(?<TID>\d+)\&extra\=page(?<CurrentPage>\d+)\.html");
+            Regex r = new Regex(@"^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=(?<TID>\d+)\&extra\=page(%3D)?(?<CurrentPage>\d+)\.html");
             Match m = r.Match(TaskInfo.Url);
             if (m.Success)
             {
@@ -78,11 +78,11 @@ namespace CSNovelCrawler.Plugin
                 }
 
                 TaskInfo.PageSection = GetSection(
-                        GetHtmlDocument(Regex.Replace(TaskInfo.Url, @"(?!^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=\d+\&extra\=page)(?<CurrentPage>\d+)(\.html)", (TaskInfo.TotalPage - 1).ToString(CultureInfo.InvariantCulture)))
+                        GetHtmlDocument(Regex.Replace(TaskInfo.Url, @"(?!^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=\d+\&extra\=page(%3D)?)(?<CurrentPage>\d+)(\.html)", (TaskInfo.TotalPage - 1).ToString(CultureInfo.InvariantCulture)))
                    );
                 TaskInfo.TotalSection = TaskInfo.PageSection * (TaskInfo.TotalPage - 1) +
                     GetSection(
-                        GetHtmlDocument(Regex.Replace(TaskInfo.Url, @"(?!^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=\d+\&extra\=page)(?<CurrentPage>\d+)(\.html)", TaskInfo.TotalPage.ToString(CultureInfo.InvariantCulture)))
+                        GetHtmlDocument(Regex.Replace(TaskInfo.Url, @"(?!^https?:\/\/\w*\.*ck101.com\/forum.php\?mod\=viewthread\&tid\=\d+\&extra\=page(%3D)?)(?<CurrentPage>\d+)(\.html)", TaskInfo.TotalPage.ToString(CultureInfo.InvariantCulture)))
                    );
             }
 
@@ -144,7 +144,7 @@ namespace CSNovelCrawler.Plugin
                             switch (TaskInfo.FailTimes % 2)//常常取不到完整資料，用多個網址取
                             {
                                 case 0:
-                                    url = string.Format("https://ck101.com/forum.php?mod=viewthread&tid={0}&page=1.html", TaskInfo.Tid);
+                                    url = string.Format("https://ck101.com/forum.php?mod=viewthread&tid={0}&extra=page1.html", TaskInfo.Tid);
                                     break;
 
                                 case 1:

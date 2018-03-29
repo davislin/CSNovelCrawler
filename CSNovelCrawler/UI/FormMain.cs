@@ -474,6 +474,10 @@ namespace CSNovelCrawler.UI
             foreach (Match match in m)
             {
                 string url = match.Groups["Url"].Value;
+                if (!url.Contains(@".html"))
+                {
+                    url += @".html";
+                }
                 IPlugin plugin = CoreManager.PluginManager.GetPlugin(url);
                 if (plugin != null)
                 {

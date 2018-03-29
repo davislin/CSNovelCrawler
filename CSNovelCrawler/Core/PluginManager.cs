@@ -53,7 +53,6 @@ namespace CSNovelCrawler.Core
 
             if (!string.IsNullOrEmpty(url))
             {
-
                 return CoreManager.PluginManager.Plugins.Find(plugin => plugin.CheckUrl(url));
             }
 

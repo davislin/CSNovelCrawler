@@ -15,14 +15,14 @@ namespace CSNovelCrawler.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (var url in richTextBox1.Lines)
+            foreach (string url in richTextBox1.Lines)
             {
                 if (!string.IsNullOrEmpty(url.Trim()))
                 {
-                    IPlugin plugin = CoreManager.PluginManager.GetPlugin(url);
+                    IPlugin plugin = CoreManager.PluginManager.GetPlugin(url.Contains(@".html") ? url : url + @".html");
                     if (plugin != null)
                     {
-                        TaskInfo taskInfo = CoreManager.TaskManager.AddTask(plugin, url);
+                        TaskInfo taskInfo = CoreManager.TaskManager.AddTask(plugin, url.Contains(@".html") ? url : url + @".html");
                         CoreManager.TaskManager.AnalysisTask(taskInfo);
                     }
 
